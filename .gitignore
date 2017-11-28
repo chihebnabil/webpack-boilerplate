@@ -1,3 +1,25 @@
-node_modules/
-dist/
-package-lock.json
+.DS_Store
+
+### Node ###
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules
+jspm_packages
+
+# Optional npm cache directory
+.npm
+
+### Bower ###
+bower_components
+.bower-cache
+.bower-registry
+.bower-tmp
+
+
+### Sass ###
+.sass-cache
+.sass-cache/*
