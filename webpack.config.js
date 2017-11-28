@@ -11,13 +11,24 @@ module.exports = {
         path: path.resolve(__dirname, 'dist')
     },
     module: {
-        rules: [{ // sass / scss loader for webpack
-            test: /\.(sass|scss)$/,
-            use: ExtractTextPlugin.extract({
-                use: ['css-loader', 'sass-loader'],
-                fallback: 'style-loader'
-            })
-        }]
+        rules: [
+            // Babel
+            {
+                test: /\.js$/,
+                loader: 'babel-loader',
+                exclude: /(node_modules)/,
+                options: {
+                    compact: true
+                }
+            },
+            { // sass / scss loader for webpack
+                test: /\.(sass|scss)$/,
+                use: ExtractTextPlugin.extract({
+                    use: ['css-loader', 'sass-loader'],
+                    fallback: 'style-loader'
+                })
+            }
+        ]
     },
     plugins: [
         new UglifyJsPlugin({
@@ -29,8 +40,12 @@ module.exports = {
         new OptimizeCssAssetsPlugin({
             assetNameRegExp: /\.optimize\.css$/g,
             cssProcessor: require('cssnano'),
-            cssProcessorOptions: { discardComments: { removeAll: true } },
+            cssProcessorOptions: {
+                discardComments: {
+                    removeAll: true
+                }
+            },
             canPrint: true
-          })
+        })
     ]
 };
